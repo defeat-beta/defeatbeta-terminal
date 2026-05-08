@@ -1,5 +1,8 @@
 # defeatbeta-terminal
 
+[![CI](https://github.com/defeat-beta/defeatbeta-terminal/actions/workflows/ci.yml/badge.svg)](https://github.com/defeat-beta/defeatbeta-terminal/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+
 A **Bloomberg-style terminal in your terminal** — a TUI client for stock
 analysis, powered by [`defeatbeta-api`][api] and rendered with [OpenTUI][opentui]
 + [Solid.js][solid]. Nine tabs cover everything from price charts to SEC
