@@ -1,0 +1,21 @@
+{
+  "name": "defeatbeta-terminal",
+  "version": "0.0.1",
+  "description": "A TUI terminal for defeatbeta-api financial data",
+  "type": "module",
+  "bin": {
+    "defeatbeta": "./src/main.tsx"
+  },
+  "scripts": {
+    "setup": "uv venv .venv && uv pip install --upgrade -r requirements.txt --python .venv/bin/python",
+    "dev": "bun run src/main.tsx",
+    "build": "bun build src/main.tsx --compile --outfile=defeatbeta"
+  },
+  "dependencies": {
+    "@opentui/solid": "0.1.88",
+    "solid-js": "^1.9.7"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

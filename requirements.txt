@@ -1,0 +1,2 @@
+defeatbeta-api>=0.0.53
+matplotlib
