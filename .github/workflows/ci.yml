@@ -31,6 +31,9 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
+          # Project uses `uv venv` + `requirements.txt` (not `uv sync`/`uv.lock`),
+          # so point the cache key at requirements.txt instead of the default uv.lock.
+          cache-dependency-glob: requirements.txt
 
       - name: Install JS dependencies
         # No --frozen-lockfile because .gitignore currently excludes bun.lock.
