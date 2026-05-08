@@ -10,6 +10,10 @@ node_modules/
 dist/
 .cache/
 
+# Build artifacts
+/defeatbeta
+/defeatbeta-*
+
 # OS
 .DS_Store
 

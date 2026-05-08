@@ -4,42 +4,55 @@
  */
 
 import { join } from "path";
-import { existsSync } from "fs";
+import { existsSync, unlinkSync, mkdirSync } from "fs";
+import { tmpdir } from "os";
 
-// Project root is two levels up from src/bridge/
-const PROJECT_ROOT = join(import.meta.dir, "../..");
+// The Python sidecar source is embedded at compile time. At runtime we
+// materialize it to a temp file (see getBridgeScriptPath below) so the
+// embedded source survives `bun build --compile`, where the original file
+// path on disk is meaningless inside the bundled binary.
+import bridgeSource from "../../scripts/bridge.py" with { type: "text" };
 
-// Find the Python executable. Priority:
-//   1. DEFEATBETA_PYTHON env var (explicit override)
-//   2. Project-local .venv (created by: uv venv && uv pip install -r requirements.txt)
-//   3. System Python with defeatbeta-api installed (fallback)
+const HOME         = process.env.HOME ?? "";
+const INSTALL_DIR  = join(HOME, ".defeatbeta-terminal"); // matches install.sh layout
+
+/**
+ * Find a Python executable that has `defeatbeta_api` importable.
+ * Priority:
+ *   1. DEFEATBETA_PYTHON env var (explicit override)
+ *   2. ~/.defeatbeta-terminal/.venv/bin/python  (created by install.sh)
+ *   3. <cwd>/.venv/bin/python                   (dev mode: `bun run dev` from repo root)
+ *   4. System Python with defeatbeta-api installed (fallback)
+ */
 async function findPython(): Promise<string> {
   if (process.env.DEFEATBETA_PYTHON) return process.env.DEFEATBETA_PYTHON;
 
-  // Check project-local venv first
-  const venvPython = join(PROJECT_ROOT, ".venv/bin/python");
-  if (existsSync(venvPython)) {
-    const check = Bun.spawn(
-      [venvPython, "-c", "import defeatbeta_api"],
-      { stdout: "ignore", stderr: "ignore" }
-    );
-    await check.exited;
-    if (check.exitCode === 0) return venvPython;
+  // 2. Installed via install.sh
+  const installedVenv = join(INSTALL_DIR, ".venv/bin/python");
+  if (existsSync(installedVenv) && await canImportDefeatbeta(installedVenv)) {
+    return installedVenv;
   }
 
-  // Fall back to any system Python that has defeatbeta-api
+  // 3. Dev mode: cwd-relative .venv (project repo)
+  const cwdVenv = join(process.cwd(), ".venv/bin/python");
+  if (existsSync(cwdVenv) && await canImportDefeatbeta(cwdVenv)) {
+    return cwdVenv;
+  }
+
+  // 4. System Python fallback
   const pathDirs = (process.env.PATH ?? "").split(":");
   const extraDirs = [
     "/opt/homebrew/opt/python@3.11/bin",
     "/opt/homebrew/opt/python@3.12/bin",
+    "/opt/homebrew/opt/python@3.13/bin",
     "/opt/homebrew/bin",
     "/usr/local/bin",
     "/usr/bin",
-    `${process.env.HOME}/.pyenv/shims`,
-    `${process.env.HOME}/.local/bin`,
+    `${HOME}/.pyenv/shims`,
+    `${HOME}/.local/bin`,
   ];
 
-  const names = ["python3.11", "python3.12", "python3", "python"];
+  const names = ["python3.13", "python3.12", "python3.11", "python3", "python"];
   const seen = new Set<string>();
 
   for (const dir of [...pathDirs, ...extraDirs]) {
@@ -47,25 +60,29 @@ async function findPython(): Promise<string> {
       const full = `${dir}/${name}`;
       if (seen.has(full)) continue;
       seen.add(full);
-
-      try {
-        const check = Bun.spawn(
-          [full, "-c", "import defeatbeta_api"],
-          { stdout: "ignore", stderr: "ignore" }
-        );
-        await check.exited;
-        if (check.exitCode === 0) return full;
-      } catch {
-        // executable not found or failed to spawn, try next candidate
-      }
+      if (await canImportDefeatbeta(full)) return full;
     }
   }
 
   throw new Error(
     "Could not find a Python with defeatbeta-api installed.\n" +
-    "Run: bun run setup\n" +
+    "If you ran the installer, make sure ~/.defeatbeta-terminal/.venv exists.\n" +
+    "If running from source, run: bun run setup\n" +
     "Or set DEFEATBETA_PYTHON=/path/to/python"
   );
+}
+
+async function canImportDefeatbeta(python: string): Promise<boolean> {
+  try {
+    const check = Bun.spawn(
+      [python, "-c", "import defeatbeta_api"],
+      { stdout: "ignore", stderr: "ignore" }
+    );
+    await check.exited;
+    return check.exitCode === 0;
+  } catch {
+    return false;
+  }
 }
 
 interface BridgeRequest {
@@ -90,7 +107,39 @@ type PendingRequest = {
   onProgress?: (msg: string) => void;
 };
 
-const BRIDGE_SCRIPT = join(import.meta.dir, "../../scripts/bridge.py");
+/**
+ * Materialize the embedded bridge.py source to a real file path so Python can
+ * spawn it. Necessary because `bun build --compile` bakes bridge.py into the
+ * binary as a string — Python can't `spawn` source out of the bundled archive.
+ *
+ * Preferred location is `~/.defeatbeta-terminal/bridge.py`, matching the
+ * install.sh layout (binary, venv, and bridge.py all live in one directory).
+ * Each launch overwrites it so the file always matches the binary's embedded
+ * source. If that directory isn't writable, we fall back to a per-pid file
+ * under the OS tmp dir, deleted on exit.
+ */
+let bridgeScriptPath: string | null = null;
+async function getBridgeScriptPath(): Promise<string> {
+  if (bridgeScriptPath) return bridgeScriptPath;
+
+  // Preferred: persist alongside the install dir.
+  try {
+    mkdirSync(INSTALL_DIR, { recursive: true });
+    const preferred = join(INSTALL_DIR, "bridge.py");
+    await Bun.write(preferred, bridgeSource);
+    bridgeScriptPath = preferred;
+    return preferred;
+  } catch {
+    // Fallback: ephemeral temp file (e.g. read-only HOME, sandboxed env).
+    const tmp = join(tmpdir(), `defeatbeta-bridge-${process.pid}.py`);
+    await Bun.write(tmp, bridgeSource);
+    bridgeScriptPath = tmp;
+    process.on("exit", () => {
+      try { unlinkSync(tmp); } catch { /* best effort */ }
+    });
+    return tmp;
+  }
+}
 
 class PythonBridge {
   private proc: ReturnType<typeof Bun.spawn> | null = null;
@@ -102,8 +151,9 @@ class PythonBridge {
 
   async start(): Promise<void> {
     const python = await findPython();
+    const bridgeScript = await getBridgeScriptPath();
     this.proc = Bun.spawn(
-      [python, BRIDGE_SCRIPT],
+      [python, bridgeScript],
       {
         stdin: "pipe",
         stdout: "pipe",

@@ -8,8 +8,8 @@
   },
   "scripts": {
     "setup": "uv venv .venv && uv pip install --upgrade -r requirements.txt --python .venv/bin/python",
-    "dev": "bun run src/main.tsx",
-    "build": "bun build src/main.tsx --compile --outfile=defeatbeta"
+    "dev": "bun run --preload @opentui/solid/preload src/main.tsx",
+    "build": "bun run scripts/build.ts"
   },
   "dependencies": {
     "@opentui/solid": "0.1.88",
