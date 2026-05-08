@@ -95,6 +95,48 @@ For larger changes (new tab, big refactor, breaking API change), please
 **open an issue first** so we can align on the approach before you spend a
 weekend on it.
 
+<details>
+<summary><b>First-time contributor? Step-by-step commands</b></summary>
+
+```bash
+# 1. Fork via GitHub UI: https://github.com/defeat-beta/defeatbeta-terminal/fork
+#    or: gh repo fork defeat-beta/defeatbeta-terminal --clone
+
+# 2. Clone your fork (replace <you> with your GitHub username)
+git clone https://github.com/<you>/defeatbeta-terminal.git
+cd defeatbeta-terminal
+
+# 3. Add the upstream remote so you can sync later
+git remote add upstream https://github.com/defeat-beta/defeatbeta-terminal.git
+
+# 4. Install deps + verify the dev loop works on your machine
+bun install
+bun run setup
+bun run dev                          # press q to quit
+
+# 5. Create a topic branch
+git checkout -b fix/typo-in-overview
+
+# 6. ...make your changes...
+
+# 7. Verify before pushing
+bunx tsc --noEmit
+bun run dev                          # smoke-test the tab(s) you touched
+
+# 8. Stage specific files (avoid `git add .`) and commit
+git add src/screens/Overview.tsx
+git commit -m "fix: typo in overview header"
+
+# 9. (Optional but recommended) sync with main if it has moved
+git fetch upstream
+git rebase upstream/main
+
+# 10. Push to your fork and open the PR via GitHub UI
+git push origin fix/typo-in-overview
+```
+
+</details>
+
 ---
 
 ## Reporting issues
