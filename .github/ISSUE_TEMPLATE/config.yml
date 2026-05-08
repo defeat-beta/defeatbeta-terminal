@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: defeatbeta-api (data layer issue)
+    url: https://github.com/defeat-beta/defeatbeta-api/issues
+    about: If the bug is about data correctness, missing tickers, parquet schema, or API methods, please file under defeatbeta-api instead.

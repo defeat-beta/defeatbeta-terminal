@@ -1,0 +1,105 @@
+name: Bug report
+description: Something is broken, behaves wrong, or renders incorrectly.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug! Filling in the fields below
+        makes it dramatically easier to fix. Bugs without a reproduction are
+        often closed unfixed — please don't skip "Steps to reproduce".
+
+  - type: input
+    id: ticker
+    attributes:
+      label: Ticker
+      description: The stock symbol you saw the bug on (or "any").
+      placeholder: AAPL
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tab
+    attributes:
+      label: Tab
+      description: Which tab triggered the bug?
+      options:
+        - "1: Overview"
+        - "2: Profile"
+        - "3: Financials"
+        - "4: Valuation"
+        - "5: Growth"
+        - "6: Profitability"
+        - "7: DCF"
+        - "8: News"
+        - "9: SEC Filings"
+        - "Multiple / not tab-specific"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Numbered steps so someone else can see the same thing.
+      placeholder: |
+        1. Run `bun run dev`
+        2. Press `/` and type `AAPL`, hit Enter
+        3. Press `8` to open News
+        4. Press `Tab` to switch to News sub-mode
+        5. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag-and-drop a screenshot here. For layout/rendering bugs this is usually the most useful info.
+
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal
+      description: e.g. iTerm2 3.5.0, kitty 0.36, Terminal.app, WezTerm, Alacritty
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS + version
+      description: e.g. macOS 14.5, Ubuntu 24.04, Windows 11 + WSL2
+    validations:
+      required: true
+
+  - type: input
+    id: defeatbeta_version
+    attributes:
+      label: defeatbeta-api version
+      description: |
+        Look at the bottom-right corner of the running app, or run
+        `.venv/bin/python -c "import importlib.metadata; print(importlib.metadata.version('defeatbeta-api'))"`
+      placeholder: "0.0.53"
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Logs, proxy config, weird network setup, prior work-arounds you tried, etc.

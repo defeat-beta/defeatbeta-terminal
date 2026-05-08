@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest something new — a tab, a metric, a keyboard shortcut, a workflow.
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea? We'd love to hear it. The best feature requests describe
+        the *user problem* first, then the proposed solution second. That way
+        we can discuss whether the solution is the right shape.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: |
+        What were you trying to do that the current app doesn't support, or supports awkwardly?
+      placeholder: |
+        I want to compare 3 tickers side-by-side on the same fundamental
+        metric without switching tabs back and forth.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed solution
+      description: |
+        What would the feature look like? Keyboard interaction, layout, key
+        data shown — sketch it however you like (text, ASCII art, screenshot mock-up).
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other ways to solve the same problem that you thought about and rejected.
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Links to similar features in other tools, related issues, etc.
