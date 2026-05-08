@@ -42,17 +42,44 @@ Global keys: `1`-`9` switch tabs, `/` or `:` triggers ticker search, `q` quits.
 
 <!-- TODO: per-tab screenshots — list of placeholders below; replace with real images. -->
 
-<details><summary>Per-tab screenshots</summary>
+<details>
+<summary>Per-tab screenshots</summary>
 
-<!-- 1 --> ![Overview](docs/screenshots/01-overview.png)
-<!-- 2 --> ![Profile](docs/screenshots/02-profile.png)
-<!-- 3 --> ![Financials](docs/screenshots/03-financials.png)
-<!-- 4 --> ![Valuation](docs/screenshots/04-valuation.png)
-<!-- 5 --> ![Growth](docs/screenshots/05-growth.png)
-<!-- 6 --> ![Profitability](docs/screenshots/06-profitability.png)
-<!-- 7 --> ![DCF](docs/screenshots/07-dcf.png)
-<!-- 8 --> ![News](docs/screenshots/08-news.png)
-<!-- 9 --> ![SEC Filings](docs/screenshots/09-sec-filings.png)
+**1. Overview**
+
+![Overview](docs/screenshots/01-overview.png)
+
+**2. Profile**
+
+![Profile](docs/screenshots/02-profile.png)
+
+**3. Financials**
+
+![Financials](docs/screenshots/03-financials.png)
+
+**4. Valuation**
+
+![Valuation](docs/screenshots/04-valuation.png)
+
+**5. Growth**
+
+![Growth](docs/screenshots/05-growth.png)
+
+**6. Profitability**
+
+![Profitability](docs/screenshots/06-profitability.png)
+
+**7. DCF**
+
+![DCF](docs/screenshots/07-dcf.png)
+
+**8. News**
+
+![News](docs/screenshots/08-news.png)
+
+**9. SEC Filings**
+
+![SEC Filings](docs/screenshots/09-sec-filings.png)
 
 </details>
 
