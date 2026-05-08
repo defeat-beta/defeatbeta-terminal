@@ -114,11 +114,16 @@ Screenshots help a lot, especially for layout / rendering issues.
 
 This project intentionally has **no ESLint/Prettier enforcement** right now.
 The codebase is small enough that "look at the surrounding code and match
-the style" is the rule. A few light conventions:
+the style" is the rule. Mechanical formatting (indent / EOL / trailing
+whitespace) is locked in by [`.editorconfig`](./.editorconfig) — most
+modern editors pick it up automatically. A few light conventions on top:
 
-- **TypeScript strict mode** is on; please don't sprinkle `any`.
+- **TypeScript strict mode** is on. `any` is acceptable at boundaries
+  (keyboard events whose upstream type isn't exported, raw API responses
+  before they're parsed into typed shapes, the occasional library
+  internals hack) — but prefer typed signatures everywhere else.
 - **camelCase** for variables / functions, **PascalCase** for components.
-- **Two-space indent**, single quotes for TS imports — match the file
+- **Two-space indent**, **double quotes** for TS imports — match the file
   you're editing.
 - **Comments**: explain *why* (non-obvious constraints, workarounds), not
   *what* — well-named identifiers already do that.

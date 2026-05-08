@@ -1,0 +1,19 @@
+# https://editorconfig.org/
+# Mechanical formatting consistency — every modern editor reads this.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Python files use the standard 4-space indent.
+[*.py]
+indent_size = 4
+
+# Markdown uses two trailing spaces as a hard line break — don't strip them.
+[*.{md,markdown}]
+trim_trailing_whitespace = false
