@@ -152,19 +152,6 @@ roadmap.
 
 ---
 
-## Roadmap
-
-- [ ] Cross-platform pre-built binaries via GitHub Actions matrix
-  (macOS arm64 / x86_64, Linux x86_64 / arm64)
-- [ ] Drop the Python sidecar — rewrite chart rendering and data layer in
-  pure JS/TS so the compiled binary truly runs standalone
-- [ ] Streaming / live-tick mode for the price tab
-- [ ] Watchlist / multi-ticker compare view
-- [ ] Configurable color themes
-- [ ] Windows native support (currently WSL only)
-
----
-
 ## Contributing
 
 Contributions welcome — issues, PRs, and ideas. See [CONTRIBUTING.md](./CONTRIBUTING.md)

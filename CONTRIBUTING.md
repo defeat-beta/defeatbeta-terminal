@@ -135,14 +135,6 @@ Look for issues labelled
 or [`help wanted`](https://github.com/defeat-beta/defeatbeta-terminal/labels/help%20wanted).
 Or pick a tab you'd like to improve and propose a change in an issue.
 
-Some areas that are currently understaffed:
-
-- Cross-platform packaging (single-file binary, Windows native support)
-- Performance / rendering polish
-- Watchlist / multi-ticker compare view
-- Configurable color themes
-- Documentation, tutorials, screencasts
-
 ---
 
 ## License
