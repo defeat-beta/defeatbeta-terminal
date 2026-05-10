@@ -119,7 +119,6 @@ brew install uv
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
-defeatbeta
 ```
 
 Then press `/` to search a ticker (e.g. `AAPL`, `NVDA`, `TSLA`), `1`-`9` to
@@ -140,27 +139,6 @@ curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/mai
 ```
 
 Development setup is documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
-
----
-
-## Architecture
-
-```
-┌──────────────────────────────┐         ┌────────────────────────────┐
-│  Bun + OpenTUI + Solid.js    │  JSON   │  Python bridge process     │
-│  (TypeScript, the TUI)       │ ──────► │  scripts/bridge.py          │
-│  src/screens/*.tsx           │ ◄────── │  - DuckDB + parquet (HF)    │
-│  src/bridge/api.ts           │         │  - matplotlib chart render  │
-└──────────────────────────────┘         └────────────────────────────┘
-```
-
-- **Frontend**: [OpenTUI][opentui] (the renderer) bound to Solid.js for
-  reactivity. Each tab is one component in `src/screens/`.
-- **Backend**: a long-lived Python subprocess (`scripts/bridge.py`) speaks
-  newline-delimited JSON-RPC over stdin/stdout. Requests fan out to a
-  thread pool; matplotlib chart rendering is serialized via a lock.
-- **Data source**: [`defeatbeta-api`][api] under the hood, which reads
-  parquet files hosted on Hugging Face via DuckDB's httpfs cache.
 
 ---
 

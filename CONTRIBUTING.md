@@ -41,6 +41,29 @@ work in TypeScript.
 
 ---
 
+## Architecture
+
+```
+┌──────────────────────────────┐         ┌────────────────────────────┐
+│  Bun + OpenTUI + Solid.js    │  JSON   │  Python bridge process     │
+│  (TypeScript, the TUI)       │ ──────► │  scripts/bridge.py          │
+│  src/screens/*.tsx           │ ◄────── │  - DuckDB + parquet (HF)    │
+│  src/bridge/api.ts           │         │  - matplotlib chart render  │
+└──────────────────────────────┘         └────────────────────────────┘
+```
+
+- **Frontend**: [OpenTUI](https://github.com/sst/opentui) (the renderer)
+  bound to Solid.js for reactivity. Each tab is one component in
+  `src/screens/`.
+- **Backend**: a long-lived Python subprocess (`scripts/bridge.py`) speaks
+  newline-delimited JSON-RPC over stdin/stdout. Requests fan out to a
+  thread pool; matplotlib chart rendering is serialized via a lock.
+- **Data source**: [`defeatbeta-api`](https://github.com/defeat-beta/defeatbeta-api)
+  under the hood, which reads parquet files hosted on Hugging Face via
+  DuckDB's httpfs cache.
+
+---
+
 ## Local setup
 
 Install [Bun](https://bun.sh/), [uv](https://github.com/astral-sh/uv), and
