@@ -137,7 +137,7 @@ If your network needs a proxy to reach Hugging Face, start it with
 HTTP_PROXY="http://127.0.0.1:8118" defeatbeta
 ```
 
-### Update
+### Update defeatbeta-terminal
 
 Run the installer again:
 
