@@ -11,7 +11,7 @@ PYTHON_DEPS=("defeatbeta-api>=0.0.53" "matplotlib")
 
 MUTED='\033[0;2m'
 RED='\033[0;31m'
-ORANGE='\033[38;5;214m'
+BRAND='\033[38;2;31;70;245m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
@@ -49,7 +49,7 @@ print_message() {
   case "$level" in
     error) color="$RED" ;;
     success) color="$GREEN" ;;
-    warning) color="$ORANGE" ;;
+    warning) color="$BRAND" ;;
   esac
 
   echo -e "${color}${message}${NC}"
@@ -284,17 +284,17 @@ configure_path() {
 
 print_success() {
   echo ""
-  echo -e "${ORANGE} ____        __           _     ____       _        ${NC}"
-  echo -e "${ORANGE}|  _ \\  ___ / _| ___  __ _| |_  | __ )  ___| |_ __ _ ${NC}"
-  echo -e "${ORANGE}| | | |/ _ \\ |_ / _ \\/ _\` | __| |  _ \\ / _ \\ __/ _\` |${NC}"
-  echo -e "${ORANGE}| |_| |  __/  _|  __/ (_| | |_  | |_) |  __/ || (_| |${NC}"
-  echo -e "${ORANGE}|____/ \\___|_|  \\___|\\__,_|\\__| |____/ \\___|\\__\\__,_|${NC}"
+  echo -e "${BRAND} ____        __           _     ____       _        ${NC}"
+  echo -e "${BRAND}|  _ \\  ___ / _| ___  __ _| |_  | __ )  ___| |_ __ _ ${NC}"
+  echo -e "${BRAND}| | | |/ _ \\ |_ / _ \\/ _\` | __| |  _ \\ / _ \\ __/ _\` |${NC}"
+  echo -e "${BRAND}| |_| |  __/  _|  __/ (_| | |_  | |_) |  __/ || (_| |${NC}"
+  echo -e "${BRAND}|____/ \\___|_|  \\___|\\__,_|\\__| |____/ \\___|\\__\\__,_|${NC}"
   echo -e "${MUTED}Financial terminal for public market data${NC}"
   echo ""
   print_message success "defeatbeta-terminal installed."
   echo ""
   echo -e "Run:"
-  echo -e "  ${ORANGE}$APP${NC}"
+  echo -e "  ${BRAND}$APP${NC}"
 
   if [[ ":$PATH:" != *":$INSTALL_BIN_DIR:"* ]]; then
     echo ""
