@@ -1,4 +1,8 @@
-# defeatbeta-terminal
+<p>
+  <img src="https://raw.githubusercontent.com/defeat-beta/defeatbeta-api/main/doc/logo.webp" alt="Defeat Beta" width="520">
+</p>
+
+# Defeat Beta Terminal
 
 [![Release](https://img.shields.io/github/v/release/defeat-beta/defeatbeta-terminal?sort=semver&label=release&labelColor=4A4A4A&color=168A2F)](https://github.com/defeat-beta/defeatbeta-terminal/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/defeat-beta/defeatbeta-terminal/total?label=downloads&labelColor=4A4A4A&color=168A2F)](https://github.com/defeat-beta/defeatbeta-terminal/releases)
