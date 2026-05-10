@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     name: build ${{ matrix.platform }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 15
 
     strategy:
@@ -20,12 +20,16 @@ jobs:
         include:
           - platform: darwin-arm64
             target: bun-darwin-arm64
+            runner: macos-latest
           - platform: darwin-x64
             target: bun-darwin-x64
+            runner: macos-15-intel
           - platform: linux-arm64
             target: bun-linux-arm64
+            runner: ubuntu-24.04-arm
           - platform: linux-x64
             target: bun-linux-x64
+            runner: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -41,6 +45,9 @@ jobs:
 
       - name: TypeScript type check
         run: bunx tsc --noEmit
+
+      - name: Check OpenTUI native package
+        run: bun -e 'await import(`@opentui/core-${process.platform}-${process.arch}/index.ts`)'
 
       - name: Build binary
         run: OUTFILE=dist/defeatbeta-${{ matrix.platform }} bun run scripts/build.ts ${{ matrix.target }}
