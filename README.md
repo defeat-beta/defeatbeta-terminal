@@ -1,7 +1,10 @@
 # defeatbeta-terminal
 
-[![CI](https://github.com/defeat-beta/defeatbeta-terminal/actions/workflows/ci.yml/badge.svg)](https://github.com/defeat-beta/defeatbeta-terminal/actions/workflows/ci.yml)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![Release](https://img.shields.io/github/v/release/defeat-beta/defeatbeta-terminal?sort=semver&label=release)](https://github.com/defeat-beta/defeatbeta-terminal/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/defeat-beta/defeatbeta-terminal/total?label=downloads)](https://github.com/defeat-beta/defeatbeta-terminal/releases)
+![macOS](https://img.shields.io/badge/macOS-supported-1F46F5)
+![Linux](https://img.shields.io/badge/Linux-supported-1F46F5)
+![Python](https://img.shields.io/badge/Python-3.11%2B-1F46F5)
 
 A **Bloomberg-style terminal in your terminal** — a TUI client for stock
 analysis, powered by [`defeatbeta-api`][api].
