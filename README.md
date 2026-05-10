@@ -1,10 +1,10 @@
 # defeatbeta-terminal
 
-[![Release](https://img.shields.io/github/v/release/defeat-beta/defeatbeta-terminal?sort=semver&label=release&color=1F46F5)](https://github.com/defeat-beta/defeatbeta-terminal/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/defeat-beta/defeatbeta-terminal/total?label=downloads&color=63EC4F)](https://github.com/defeat-beta/defeatbeta-terminal/releases)
-![macOS](https://img.shields.io/badge/macOS-supported-1F46F5)
-![Linux](https://img.shields.io/badge/Linux-supported-1F46F5)
-![Python](https://img.shields.io/badge/Python-3.11%2B-63EC4F)
+[![Release](https://img.shields.io/github/v/release/defeat-beta/defeatbeta-terminal?sort=semver&label=release&labelColor=4A4A4A&color=168A2F)](https://github.com/defeat-beta/defeatbeta-terminal/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/defeat-beta/defeatbeta-terminal/total?label=downloads&labelColor=4A4A4A&color=168A2F)](https://github.com/defeat-beta/defeatbeta-terminal/releases)
+![macOS](https://img.shields.io/badge/macOS-supported-168A2F?labelColor=4A4A4A)
+![Linux](https://img.shields.io/badge/Linux-supported-168A2F?labelColor=4A4A4A)
+![Python](https://img.shields.io/badge/Python-3.11%2B-168A2F?labelColor=4A4A4A)
 
 A **Bloomberg-style terminal in your terminal** — a TUI client for stock
 analysis, powered by [`defeatbeta-api`][api].
