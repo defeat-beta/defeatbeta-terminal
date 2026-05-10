@@ -4,9 +4,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
 A **Bloomberg-style terminal in your terminal** — a TUI client for stock
-analysis, powered by [`defeatbeta-api`][api] and rendered with [OpenTUI][opentui]
-+ [Solid.js][solid]. Nine tabs cover everything from price charts to SEC
-filings, with the keyboard model and visual density of a real trading terminal.
+analysis, powered by [`defeatbeta-api`][api].
 
 > **Status:** v0.0.x, actively developed. macOS-tested; Linux should work, Windows
 > via WSL only.
@@ -92,7 +90,6 @@ Global keys: `1`-`9` switch tabs, `/` or `:` triggers ticker search, `q` quits.
 
 ### Prerequisites
 
-- **[Bun][bun]** ≥ 1.1 (the JS/TS runtime)
 - **[uv][uv]** (Python package manager)
 - **Python** 3.11+
 - **Terminal that supports iTerm2 inline images** for the price chart on the
@@ -104,42 +101,45 @@ Global keys: `1`-`9` switch tabs, `/` or `:` triggers ticker search, `q` quits.
 [bun]: https://bun.sh/
 [uv]: https://github.com/astral-sh/uv
 
-### Install + run
+### Install uv
 
-Install the latest release:
+macOS/Linux:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Or with Homebrew:
+
+```bash
+brew install uv
+```
+
+### Install defeatbeta-terminal
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
 defeatbeta
 ```
 
-Or run from source:
-
-```bash
-git clone https://github.com/defeat-beta/defeatbeta-terminal.git
-cd defeatbeta-terminal
-
-bun install        # JS/TS deps
-bun run setup      # creates .venv and installs defeatbeta-api + matplotlib
-
-# Run (set http_proxy if needed):
-bun run dev
-# or with a proxy:
-http_proxy="http://127.0.0.1:8118" bun run dev
-```
-
 Then press `/` to search a ticker (e.g. `AAPL`, `NVDA`, `TSLA`), `1`-`9` to
 switch tabs, `q` to quit.
 
-### Build a standalone binary
+If your network needs a proxy to reach Hugging Face:
 
 ```bash
-bun run build      # → ./defeatbeta (compiled with `bun build --compile`)
+http_proxy="http://127.0.0.1:8118" defeatbeta
 ```
 
-The compiled binary embeds the TypeScript app and Python bridge source. Runtime
-Python dependencies are installed by `install.sh` into
-`~/.defeatbeta-terminal/.venv`.
+### Update
+
+Run the installer again:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
+```
+
+Development setup is documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ---
 

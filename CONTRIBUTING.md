@@ -43,12 +43,28 @@ work in TypeScript.
 
 ## Local setup
 
-See [README.md → Quick start](./README.md#quick-start). TL;DR:
+Install [Bun](https://bun.sh/), [uv](https://github.com/astral-sh/uv), and
+Python 3.11+ first.
+
+Run from source:
 
 ```bash
+git clone https://github.com/defeat-beta/defeatbeta-terminal.git
+cd defeatbeta-terminal
+
 bun install        # JS/TS deps
-bun run setup     # creates .venv and installs defeatbeta-api + matplotlib
-bun run dev      # or:  http_proxy="http://127.0.0.1:8118" bun run dev
+bun run setup      # creates .venv and installs defeatbeta-api + matplotlib
+
+# Run:
+bun run dev
+# Or with a proxy:
+http_proxy="http://127.0.0.1:8118" bun run dev
+```
+
+Build a standalone binary:
+
+```bash
+bun run build      # -> ./defeatbeta
 ```
 
 Before pushing, please run:
