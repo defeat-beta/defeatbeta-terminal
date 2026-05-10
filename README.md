@@ -106,6 +106,15 @@ Global keys: `1`-`9` switch tabs, `/` or `:` triggers ticker search, `q` quits.
 
 ### Install + run
 
+Install the latest release:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | sh
+defeatbeta
+```
+
+Or run from source:
+
 ```bash
 git clone https://github.com/defeat-beta/defeatbeta-terminal.git
 cd defeatbeta-terminal
@@ -128,9 +137,9 @@ switch tabs, `q` to quit.
 bun run build      # → ./defeatbeta (compiled with `bun build --compile`)
 ```
 
-The binary still needs Python + the `defeatbeta-api` package on the system
-(it spawns `scripts/bridge.py`). True single-file distribution is on the
-roadmap.
+The compiled binary embeds the TypeScript app and Python bridge source. Runtime
+Python dependencies are installed by `install.sh` into
+`~/.defeatbeta-terminal/.venv`.
 
 ---
 
