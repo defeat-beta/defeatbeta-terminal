@@ -149,8 +149,6 @@ Run the installer again:
 curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
 ```
 
-Development setup is documented in [CONTRIBUTING.md](./CONTRIBUTING.md).
-
 ---
 
 ## Contributing
