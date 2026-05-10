@@ -109,7 +109,7 @@ Global keys: `1`-`9` switch tabs, `/` or `:` triggers ticker search, `q` quits.
 Install the latest release:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
 defeatbeta
 ```
 
