@@ -13,9 +13,6 @@
 A **Bloomberg-style terminal in your terminal** — a TUI client for stock
 analysis, powered by [`defeatbeta-api`][api].
 
-> **Status:** v0.0.x, actively developed. macOS-tested; Linux should work, Windows
-> via WSL only.
-
 [api]: https://github.com/defeat-beta/defeatbeta-api
 [opentui]: https://github.com/sst/opentui
 [solid]: https://www.solidjs.com/
