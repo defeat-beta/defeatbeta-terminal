@@ -121,13 +121,20 @@ brew install uv
 curl -fsSL https://raw.githubusercontent.com/defeat-beta/defeatbeta-terminal/main/install.sh | bash
 ```
 
-Then press `/` to search a ticker (e.g. `AAPL`, `NVDA`, `TSLA`), `1`-`9` to
-switch tabs, `q` to quit.
-
-If your network needs a proxy to reach Hugging Face:
+Start the terminal:
 
 ```bash
-http_proxy="http://127.0.0.1:8118" defeatbeta
+defeatbeta
+```
+
+Then press `/` to search a ticker (for example `AAPL`, `NVDA`, or `TSLA`),
+`1`-`9` to switch tabs, and `q` to quit.
+
+If your network needs a proxy to reach Hugging Face, start it with
+`HTTP_PROXY`:
+
+```bash
+HTTP_PROXY="http://127.0.0.1:8118" defeatbeta
 ```
 
 ### Update
