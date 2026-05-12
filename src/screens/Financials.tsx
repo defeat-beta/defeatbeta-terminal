@@ -288,6 +288,7 @@ export default function Financials(props: Props) {
 
   const statement = createMemo(() => data()?.statement ?? []);
   const periods   = createMemo(() => data()?.periods   ?? []);
+  const displayCurrency = createMemo(() => data()?.currency ?? "USD");
 
   /** Aligned breakdown: rows = segment/geo, values reordered to match statement periods */
   const alignedBreakdown = createMemo<AlignedBreakdown | null>(() => {
@@ -481,7 +482,7 @@ export default function Financials(props: Props) {
           marginRight={2}
         >{!isQuarterly() ? " Annual " : "Annual"}</text>
         <text style={{ fg: "white" }}>{"  ·  "}</text>
-        <text style={{ fg: "white" }}>{data()?.currency ?? "USD"}</text>
+        <text style={{ fg: "white" }}>{displayCurrency()}</text>
       </box>
 
       <text style={{ fg: "gray" }}>{divider()}</text>
@@ -592,7 +593,7 @@ export default function Financials(props: Props) {
                 const HINT_GEO_A  = "[Geography]";
                 const HINT_GEO_B  = " Geography ";
                 const HINT_SEP    = "  ";
-                const HINT_TAIL   = "  ·  USD  ·  ⇥: switch  ·  ⏎/↓: close  ·  ←→: cols";
+                const HINT_TAIL   = `  ·  ${displayCurrency()}  ·  ⇥: switch  ·  ⏎/↓: close  ·  ←→: cols`;
                 const headerContentW = createMemo(() =>
                   HINT_PREFIX.length
                     + (breakdown() === "segment" ? HINT_SEG_A : HINT_SEG_B).length
